@@ -1,0 +1,15 @@
+# sbt
+bin/
+project/
+target/
+build/
+
+# intellij
+*.log
+*.iml
+*.ipr
+*.iws
+.idea
+
+# mac
+.DS_Store

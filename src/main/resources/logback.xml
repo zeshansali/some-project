@@ -1,11 +1,27 @@
 <configuration>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    <appender name="jsonConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <jsonGeneratorDecorator class="net.logstash.logback.decorate.PrettyPrintingJsonGeneratorDecorator"/>
+            <includeCallerData>true</includeCallerData>
+            <timestampPattern>yyyy-MM-dd'T'HH:mm:ss.SSS</timestampPattern>
+            <timeZone>UTC</timeZone>
+            <fieldNames>
+                <callerClass>[ignore]</callerClass>
+                <callerFile>file_name</callerFile>
+                <callerLine>line_number</callerLine>
+                <callerMethod>[ignore]</callerMethod>
+                <message>message</message>
+                <level>[ignore]</level>
+<!--                <levelValue>[ignore]</levelValue>-->
+                <logger>[ignore]</logger>
+                <thread>[ignore]</thread>
+                <timestamp>timestamp</timestamp>
+                <version>[ignore]</version>
+            </fieldNames>
         </encoder>
     </appender>
 
-    <root level="INFO">
-        <appender-ref ref="STDOUT" />
+    <root level="info">
+        <appender-ref ref="jsonConsoleAppender"/>
     </root>
 </configuration>
